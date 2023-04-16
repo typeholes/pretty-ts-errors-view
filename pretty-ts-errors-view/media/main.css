@@ -42,10 +42,32 @@ code {
    color: inherit;
    background: var(--vscode-textCodeBlock-background);
    font-family: var(--vscode-editor-font-family);
+   display: contents;
 }
 
 ul,
 ol {
    padding-left: 20px;
    margin: 8px;
+}
+
+pre {
+   display: contents;
+}
+
+span {
+   display: contents;
+}
+
+.codicon[class*='codicon-'] {
+   font: normal normal normal 16px/1 codicon;
+   display: contents;
+   text-decoration: none;
+   text-rendering: auto;
+   text-align: center;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+   user-select: none;
+   -webkit-user-select: none;
+   -ms-user-select: none;
 }

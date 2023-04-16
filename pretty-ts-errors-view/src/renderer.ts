@@ -3,8 +3,6 @@ import * as vscode from 'vscode';
 import { CodeHighlighter } from './codeHighlighter';
 import { formatDiagnostic } from './format/formatDiagnostic';
 
-
-
 export class Renderer {
    private readonly _disposables: vscode.Disposable[] = [];
 
@@ -17,9 +15,7 @@ export class Renderer {
       this._disposables.push(this._highlighter);
 
       this.needsRender = this._highlighter.needsRender;
-
    }
-
 
    dispose() {
       let item: vscode.Disposable | undefined;
@@ -35,7 +31,7 @@ export class Renderer {
       const config = vscode.workspace.getConfiguration('docsView');
       const gfmEnabled = config.get('gfmEnabled', true);
       const sanitizeEnabled = config.get('sanitizeEnabled', false);
-      const parts = diagnostics .map( d => formatDiagnostic(d).value);
+      const parts = diagnostics.map((d) => formatDiagnostic(d).value);
 
       if (!parts.length) {
          return '';
@@ -45,11 +41,13 @@ export class Renderer {
 
       const highlighter = await this._highlighter.getHighlighter(document);
 
-      return marked(markdown, {
+      const rendered = marked(markdown, {
          highlight: highlighter,
          sanitize: sanitizeEnabled,
          gfm: gfmEnabled,
       });
+
+      return rendered.replaceAll('<p></p>', '');
    }
 
    // private getMarkdown(content: vscode.MarkedString): string {
