@@ -1,0 +1,135 @@
+{
+  "name": "pretty-ts-errors-view",
+  "displayName": "pretty-ts-errors-view",
+  "description": "pretty-ts-errors plus panel view",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.77.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:typescript",
+    "onLanguage:javascript",
+    "onLanguage:typescriptreact",
+    "onLanguage:javascriptreact",
+    "onLanguage:astro",
+    "onLanguage:svelte",
+    "onLanguage:vue",
+    "onLanguage:mdx"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "type",
+        "extensions": [
+          ".type"
+        ]
+      }
+    ],
+    "grammars": [
+      {
+        "language": "type",
+        "scopeName": "source.type",
+        "path": "./src/syntaxes/type.tmGrammar.json"
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "type": "webview",
+          "id": "docsView.documentation",
+          "name": "Pretty TS Errors",
+          "contextualTitle": "Pretty TS Errors"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "docsView.documentationView.pin",
+        "title": "Pin Current Documentation",
+        "icon": "$(pin)",
+        "category": "Docs View"
+      },
+      {
+        "command": "docsView.documentationView.unpin",
+        "title": "Unpin Current Documentation",
+        "icon": "$(pinned)",
+        "category": "Docs View"
+      }
+    ],
+    "configuration": {
+      "title": "Pretty TypeScript Errors 2",
+      "properties": {
+        "docsView.documentationView.updateMode": {
+          "type": "string",
+          "description": "Controls how the documentation view is updated when the cursor moves.",
+          "default": "live",
+          "enum": [
+            "live",
+            "sticky"
+          ],
+          "enumDescriptions": [
+            "The documentation view tracks the current cursor position. Display empty content if no documentation is found at the current position.",
+            "The documentation view tries to show the documentation at the current cursor position. If there is none, it continues showing the last available documentation."
+          ]
+        },
+        "prettyTsErrors.target": {
+          "type": "string",
+          "default": "hover",
+          "enum": [
+            "hover",
+            "panel",
+            "both"
+          ],
+          "enumDescriptions": [
+            "Show pretty errors on hover",
+            "Show pretty errors in a panel",
+            "Show pretty errors on hover and in a panel"
+          ]
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.77.0",
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
+    "eslint": "^8.36.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "typescript": "^5.0.2",
+    "ts-loader": "^9.4.2",
+    "webpack": "^5.76.3",
+    "webpack-cli": "^5.0.1",
+    "@vscode/test-electron": "^2.3.0",
+    "@types/marked": "^4.0.8",
+    "@types/prettier": "^2.7.2"
+  },
+  "dependencies": {
+    "@vscode/codicons": "^0.0.32",
+    "json5": "^2.2.3",
+    "marked": "^4.3.0",
+    "prettier": "^2.8.7",
+    "shiki-themes": "^0.2.5",
+    "shiki": "^0.2.5",
+    "ts-dedent": "^2.2.0",
+    "lz-string": "^1.4.4"
+  }
+}
