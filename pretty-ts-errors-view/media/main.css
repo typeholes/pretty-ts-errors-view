@@ -3,14 +3,15 @@ body {
    margin: 1em 0;
    padding: 0;
 
-   font-size: 12px;
-   line-height: 17px;
+   font-size: 10px;
+   line-height: 15px;
 }
 
 article#main > pre {
    display: inline-block;
    padding: 0px;
    margin: 0px;
+   border: 1px solid var(--vscode-inputOption-activeBorder);
 }
 
 pre code {
@@ -42,7 +43,8 @@ code {
    color: inherit;
    background: var(--vscode-textCodeBlock-background);
    font-family: var(--vscode-editor-font-family);
-   display: contents;
+   display: inline-block;
+   vertical-align: text-top;
 }
 
 ul,
@@ -52,22 +54,13 @@ ol {
 }
 
 pre {
-   display: contents;
+   display: inline-block;
 }
 
 span {
-   display: contents;
+   display: inline-block;
 }
 
 .codicon[class*='codicon-'] {
-   font: normal normal normal 16px/1 codicon;
-   display: contents;
-   text-decoration: none;
-   text-rendering: auto;
-   text-align: center;
-   -webkit-font-smoothing: antialiased;
-   -moz-osx-font-smoothing: grayscale;
-   user-select: none;
-   -webkit-user-select: none;
-   -ms-user-select: none;
+   font: normal normal normal 12px/1 codicon;
 }
